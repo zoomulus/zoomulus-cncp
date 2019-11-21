@@ -17,13 +17,16 @@
 
 <configuration>
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <encoder>
             <Pattern>
                 %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
             </Pattern>
-        </layout>
+        </encoder>
     </appender>
     <logger name="com.zoomulus" level="debug" additivity="false">
+        <appender-ref ref="console" />
+    </logger>
+    <logger name="ch.qos.logback" level="warn" additivity="false">
         <appender-ref ref="console" />
     </logger>
 </configuration>
