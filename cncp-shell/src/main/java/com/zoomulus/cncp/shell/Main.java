@@ -17,17 +17,47 @@
 
 package com.zoomulus.cncp.shell;
 
-import org.apache.commons.cli.Options;
+import com.google.inject.Guice;
+import com.zoomulus.cncp.cli.CLI;
+import com.zoomulus.cncp.shell.modules.AppModule;
+import org.apache.commons.cli.*;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.nio.file.Paths;
 
 public class Main {
     private static Logger LOG = LoggerFactory.getLogger(Main.class);
 
     public static void main(@NotNull final String[] args) {
-        Options options = new Options();
+        try {
+            Options options = new Options();
+            options.addOption("c","config",true,"Configuration file path (default: ~/.zoomsh/config");
 
-        LOG.info("Starting Zoomulus CNCP Shell");
+            CommandLineParser parser = new DefaultParser();
+            CommandLine commandLine = parser.parse(options, args);
+
+            File cfg = commandLine.hasOption("config") ?
+                    new File(commandLine.getOptionValue("config")) :
+                    Paths.get(System.getProperty("user.home"), ".zoomsh", "config").toFile();
+
+            if(cfg.exists()) {
+                Guice.createInjector(new AppModule(cfg)).getInstance(CLI.class)
+                        .withPrompt("=zoomsh > ")
+                        .withCommandsRecursive(Main.class.getPackageName())
+                        .run();
+            }
+            else {
+                LOG.error("No configuration file found at {}", cfg.getAbsolutePath());
+            }
+        }
+        catch (ParseException e) {
+            LOG.error("Unable to parse command line", e);
+        }
+        catch (Exception e) {
+            LOG.error("Caught exception", e);
+        }
     }
 }
