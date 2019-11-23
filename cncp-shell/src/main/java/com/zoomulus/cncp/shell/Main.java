@@ -18,9 +18,13 @@
 package com.zoomulus.cncp.shell;
 
 import com.google.inject.Guice;
-import com.zoomulus.cncp.cli.CLI;
+import com.zoomulus.cli.CLI;
 import com.zoomulus.cncp.shell.modules.AppModule;
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +50,7 @@ public class Main {
             if(cfg.exists()) {
                 Guice.createInjector(new AppModule(cfg)).getInstance(CLI.class)
                         .withPrompt("=zoomsh > ")
-                        .withCommandsRecursive(Main.class.getPackageName())
+                        .findCommandsRecursive(Main.class.getPackageName())
                         .run();
             }
             else {

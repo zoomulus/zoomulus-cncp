@@ -18,14 +18,14 @@
 package com.zoomulus.cncp.shell.commands;
 
 import com.google.common.collect.Lists;
-import com.zoomulus.cncp.cli.Command;
+import com.zoomulus.cli.Command;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class ExitCommand implements Command {
-    public List<String> getNames() { return Lists.newArrayList("exit", "quit", "bye"); }
-    public boolean run(@NotNull final List<String> args) {
+    public @NotNull List<String> getNames() { return Lists.newArrayList("exit", "quit", "bye"); }
+    public boolean run(@NotNull final String commandName, @NotNull final List<String> args) {
         return false;
     }
 }
