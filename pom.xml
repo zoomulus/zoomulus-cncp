@@ -83,7 +83,6 @@
 
     <modules>
         <module>cncp-parent</module>
-        <module>cncp-cli</module>
         <module>cncp-shell</module>
     </modules>
 </project>
