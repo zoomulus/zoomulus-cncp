@@ -21,11 +21,18 @@ import com.google.common.collect.Lists;
 import com.zoomulus.cli.Command;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.PrintStream;
 import java.util.List;
+import java.util.Optional;
 
 public class ExitCommand implements Command {
     public @NotNull List<String> getNames() { return Lists.newArrayList("exit", "quit", "bye"); }
-    public boolean run(@NotNull final String commandName, @NotNull final List<String> args) {
+    public @NotNull String getShortDescription() { return "Exits the CLI."; }
+    public @NotNull Optional<String> getLongDescription() { return Optional.empty(); }
+    public boolean run(@NotNull final String commandName,
+                       @NotNull final List<String> args,
+                       @NotNull final PrintStream out,
+                       @NotNull final PrintStream err) {
         return false;
     }
 }
