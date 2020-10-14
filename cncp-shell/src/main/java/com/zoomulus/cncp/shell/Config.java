@@ -23,12 +23,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.Properties;
 
 public class Config extends Properties {
+    private @NotNull final Path cfgPath;
+
     public Config(@NotNull final File cfgFile) throws IOException {
+        cfgPath = cfgFile.toPath();
         try (InputStream is = new FileInputStream(cfgFile)) {
             load(is);
         }
+    }
+
+    @NotNull
+    public Path getCfgPath() {
+        return cfgPath;
     }
 }

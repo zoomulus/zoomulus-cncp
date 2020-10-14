@@ -30,20 +30,20 @@ public class Blob {
     private final BlobStore blobStore;
     private final BlobIdentifier id;
 
-    Blob(@NotNull final BlobStore blobStore,
+    public Blob(@NotNull final BlobStore blobStore,
          @NotNull final String name,
          long length) {
         this(blobStore, generateUniqueIdentifier(), name, length);
     }
 
-    Blob(@NotNull final BlobStore blobStore,
+    public Blob(@NotNull final BlobStore blobStore,
          @NotNull final String uniqueId,
          @NotNull final String name,
          long length) {
         this(blobStore, uniqueId, name, length, OffsetDateTime.now());
     }
 
-    Blob(@NotNull final BlobStore blobStore,
+    public Blob(@NotNull final BlobStore blobStore,
          @NotNull final String uniqueId,
          @NotNull final String name,
          long length,
@@ -52,7 +52,7 @@ public class Blob {
         id = new BlobIdentifier(uniqueId, name, length, created);
     }
 
-    Blob(@NotNull final BlobStore blobStore, @NotNull final BlobIdentifier blobIdentifier) throws IllegalArgumentException {
+    public Blob(@NotNull final BlobStore blobStore, @NotNull final BlobIdentifier blobIdentifier) throws IllegalArgumentException {
         this.blobStore = blobStore;
         id = blobIdentifier;
     }

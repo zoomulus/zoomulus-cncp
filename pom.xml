@@ -85,6 +85,7 @@
         <module>cncp-parent</module>
         <module>cncp-utils</module>
         <module>cncp-blobstore</module>
+        <module>cncp-blobstore-file</module>
         <module>cncp-nodestore</module>
         <module>cncp-filesystem</module>
         <module>cncp-shell</module>

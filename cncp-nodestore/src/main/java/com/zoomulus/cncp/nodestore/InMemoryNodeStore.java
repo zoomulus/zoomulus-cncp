@@ -22,6 +22,7 @@ import com.google.common.collect.Maps;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.inject.Inject;
 import java.nio.file.Paths;
 import java.time.OffsetDateTime;
 import java.util.Iterator;
@@ -39,6 +40,7 @@ public class InMemoryNodeStore implements NodeStore {
     private final Map<Node, Map<String, Object>> properties = Maps.newConcurrentMap();
     private final Map<Node, Content> content = Maps.newConcurrentMap();
 
+    @Inject
     public InMemoryNodeStore() {
         root = createNode("/");
     }
